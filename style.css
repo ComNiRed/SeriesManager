@@ -1,0 +1,336 @@
+
+body {
+    background-color: ghostwhite;
+    font-family: "Arial", serif;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+body > div {
+    width: 90%;
+    max-width: 1000px;
+}
+
+.functionBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.functionBar > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.functionBar * {
+    padding: 0 5px;
+}
+
+.toTheLeft {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tCategoryFunctionBar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 13px;
+}
+
+.tCategoryFunctionBar * {
+    padding: 0 5px;
+}
+
+.tCategoryBar div {
+    min-width: 200px;
+}
+
+#addSeriesBar {
+    flex-wrap: wrap;
+}
+
+.numText {
+    width: 20px;
+}
+
+fieldset {
+    border: 3px black solid;
+    border-radius: 25px;
+    padding: 20px;
+    width: 100%;
+    background: aliceblue;
+}
+
+fieldset > div {
+    display: flex;
+}
+
+fieldset > div > section {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section > label {
+    width: 25%;
+}
+
+legend {
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+label {
+    padding: 0 5px;
+}
+
+section > input, section > textarea {
+    width: 60%;
+}
+
+section span {
+    width: 100%;
+}
+
+.formBar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.hide { display: none; }
+
+.tCategoryBar {
+    display: flex;
+    justify-content: space-between;
+}
+
+#searchBar {
+    border-radius: 10px;
+    height: 30px;
+    width: 300px;
+}
+
+#dataStatus {
+    width: 100%;
+    max-width: 150px;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.green { color: green }
+
+.middleTable {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    align-content: center;
+    border-collapse:collapse;
+}
+
+.clearDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 20px;
+}
+
+#topLeftCorner { border-top-left-radius: 10px; }
+#topRightCorner { border-top-right-radius: 10px; }
+tfoot th {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+th {
+    height: 25px;
+    background-color:#c4c4c4;
+    text-align:center;
+}
+
+td {
+    height: 40px;
+    background-color:white;
+    text-align:center;
+}
+
+td, th { padding: 3px }
+tbody tr:hover td, tbody tr.sad:hover td { background: whitesmoke !important; }
+td:first-child { max-width:250px; }
+td:nth-child(7) { max-width:500px; }
+tr.sat td { background-color:lightgrey !important; }
+
+.saveButton img {
+    width: 15px;
+}
+
+.saveButton {
+    display: flex;
+    align-items: center;
+}
+
+.edit {
+    width: 50px;
+}
+
+.edit img {
+    width: 15px;
+}
+
+.pasvu { background-color:#FC3D3D !important; }
+.vu { background-color:#4CE622 !important; }
+.encour { background-color:#F9A33F !important; }
+
+.wikiLink div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wikiLink button {
+    border: none;
+    border-radius: 100%;
+    width: 100%;
+    max-width: 20px;
+    height: 100%;
+    max-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background: #0d6efd;
+    color: white;
+}
+
+.wikiLink button:hover {
+    background: #0b5ed7;
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+div#myModal > div {
+    width: 850px;
+    height: fit-content;
+}
+
+/* Dark Mode */
+
+body.darkMode {
+    background-color: #3C3F41;
+    color: #aba598;
+}
+
+body.darkMode .green {
+    color: lawngreen;
+}
+
+body.darkMode tbody {
+    color: #1c1b1b;
+}
+
+body.darkMode th {
+    background-color: #545350;
+    color: #C1BCBC;
+}
+
+body.darkMode tbody tr:hover td, body.darkMode tbody tr.sad:hover td {
+    background: #73726F !important;
+}
+
+body.darkMode td {
+    background-color: #928F96;
+}
+
+body.darkMode tr.sat td {
+    background-color: #656461 !important;
+}
+
+body.darkMode fieldset {
+    background-color: #928F96;
+    color: black;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

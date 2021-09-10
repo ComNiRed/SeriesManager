@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Series Manager</title>
+    <style>
+
+        body {
+            background-color: ghostwhite;
+            font-family: "Arial", serif;
+            padding: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        body > div {
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .functionBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        .functionBar > div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .functionBar * {
+            padding: 0 5px;
+        }
+
+        .toTheLeft {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .tCategoryFunctionBar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 13px;
+        }
+
+        .tCategoryFunctionBar * {
+            padding: 0 5px;
+        }
+
+        .tCategoryBar div {
+            min-width: 200px;
+        }
+
+        #addSeriesBar {
+            flex-wrap: wrap;
+        }
+
+        .numText {
+            width: 20px;
+        }
+
+        fieldset {
+            border: 3px black solid;
+            border-radius: 25px;
+            padding: 20px;
+            width: 100%;
+            background: aliceblue;
+        }
+
+        fieldset > div {
+            display: flex;
+        }
+
+        fieldset > div > section {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        section > label {
+            width: 25%;
+        }
+
+        legend {
+            font-size: 20px;
+            padding: 0 10px;
+        }
+
+        label {
+            padding: 0 5px;
+        }
+
+        section > input, section > textarea {
+            width: 60%;
+        }
+
+        section span {
+            width: 100%;
+        }
+
+        .formBar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        .hide { display: none; }
+
+        .tCategoryBar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #searchBar {
+            border-radius: 10px;
+            height: 30px;
+            width: 300px;
+        }
+
+        #dataStatus {
+            width: 100%;
+            max-width: 150px;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .green { color: green }
+
+        .middleTable {
+            display: flex;
+            justify-content: center;
+        }
+
+        table {
+            align-content: center;
+            border-collapse:collapse;
+        }
+
+        .clearDiv {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 20px;
+        }
+
+        #topLeftCorner { border-top-left-radius: 10px; }
+        #topRightCorner { border-top-right-radius: 10px; }
+        tfoot th {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        th {
+            height: 25px;
+            background-color:#c4c4c4;
+            text-align:center;
+        }
+
+        td {
+            height: 40px;
+            background-color:white;
+            text-align:center;
+        }
+
+        td, th { padding: 3px }
+        tbody tr:hover td, tbody tr.sad:hover td { background: whitesmoke !important; }
+        td:first-child { max-width:250px; }
+        td:nth-child(7) { max-width:500px; }
+        tr.sat td { background-color:lightgrey !important; }
+
+        .saveButton img {
+            width: 15px;
+        }
+
+        .saveButton {
+            display: flex;
+            align-items: center;
+        }
+
+        .edit {
+            width: 50px;
+        }
+
+        .edit img {
+            width: 15px;
+        }
+
+        .pasvu { background-color:#FC3D3D !important; }
+        .vu { background-color:#4CE622 !important; }
+        .encour { background-color:#F9A33F !important; }
+
+        .wikiLink div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wikiLink button {
+            border: none;
+            border-radius: 100%;
+            width: 100%;
+            max-width: 20px;
+            height: 100%;
+            max-height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            background: #0d6efd;
+            color: white;
+        }
+
+        .wikiLink button:hover {
+            background: #0b5ed7;
+        }
+
+        .modal {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        div#myModal > div {
+            width: 850px;
+            height: fit-content;
+        }
+
+        /* Dark Mode */
+
+        body.darkMode {
+            background-color: #3C3F41;
+            color: #aba598;
+        }
+
+        body.darkMode .green {
+            color: lawngreen;
+        }
+
+        body.darkMode tbody {
+            color: #1c1b1b;
+        }
+
+        body.darkMode th {
+            background-color: #545350;
+            color: #C1BCBC;
+        }
+
+        body.darkMode tbody tr:hover td, body.darkMode tbody tr.sad:hover td {
+            background: #73726F !important;
+        }
+
+        body.darkMode td {
+            background-color: #928F96;
+        }
+
+        body.darkMode tr.sat td {
+            background-color: #656461 !important;
+        }
+
+        body.darkMode fieldset {
+            background-color: #928F96;
+            color: black;
+        }
+
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 25px;
+            height: 20px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(15px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body id="body">
+    <div>
+        <div class="toTheLeft functionBar">
+            <span>Dark Mode</span>
+            <label id="darkMode" class="switch" hide="false">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="functionBar">
+            <input type="search" id="searchBar" placeholder="Search...">
+            <div>
+                <input type="file" id="selectDataFile">
+                <button id="loadData">Load Data</button>
+                <span id="dataStatus"></span>
+                <button id="downloadJSON">Download JSON Data</button>
+            </div>
+        </div>
+        <div class="functionBar">
+            <div></div>
+            <div>
+                <span>Hide finished series ?</span>
+                <label id="hideFinishedSeries" class="switch" hide="false">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <a id="addCategoryLink">[+Category]</a>
+            </div>
+        </div>
+        <div id="addCategoryBar" class="formBar hide">
+            <label>Name : <input type="text" id="categoryName"></label>
+            <button id="addCategory" class="saveButton"><img src="https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/save-512.png" alt="save.png"/>Save</button>
+        </div>
+        <div id="addSeriesBar" class="formBar hide">
+            <fieldset>
+                <legend></legend>
+                <div>
+                    <section>
+                        <label for="seriesNum">N°</label><input type="number" id="seriesNum"/>
+                        <label for="seriesName">Name :</label><input type="text" id="seriesName">
+                        <label for="seriesWikiFR">Wiki FR :</label><input type="text" id="seriesWikiFR">
+                        <label for="seriesWikiEN">Wiki EN :</label><input type="text" id="seriesWikiEN">
+                        <label for="seriesNote">Note :</label><textarea id="seriesNote"></textarea>
+                    </section>
+                    <section>
+                        <span><u><b>Seasons</b></u> :</span>
+                        <label for="seriesSOut">Out :</label><input type="text" id="seriesSOut">
+                        <label for="seriesSSeen">Seen :</label><input type="text" id="seriesSSeen">
+                        <label for="seriesSInProgress">In Progress :</label><input type="text" id="seriesSInProgress">
+                        <label for="seriesSNotSeen">Not Seen :</label><input type="text" id="seriesSNotSeen">
+                        <label for="seriesSComing">Coming :</label><input type="text" id="seriesSComing">
+                        <label for="seriesFinished">Finished?</label><div><input type="checkbox" id="seriesFinished"></div>
+                    </section>
+                </div>
+                <section class="toTheLeft">
+                    <button id="addSeries" class="saveButton"><img src="https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/save-512.png" alt="save.png"/>Save</button>
+                </section>
+            </fieldset>
+        </div>
+        <div class="middleTable">
+            <table cellspacing="3px" id="table">
+                <thead>
+                    <tr>
+                        <th rowspan="2" width="250px" id="topLeftCorner">Nom</th>
+                        <th rowspan="2" width="100px">Saisons sortie</th>
+                        <th rowspan="2" width="100px" colspan="3">Saisons Vue</th>
+                        <th rowspan="2" width="100px">Saison à venir</th>
+                        <th rowspan="2" width="500px">Note</th>
+                        <th colspan="2" width="100px">Wiki</th>
+                        <th rowspan="2" id="topRightCorner"></th>
+                    </tr>
+                    <tr>
+                        <th>FR</th>
+                        <th>VO</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th colspan="10"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="clearDiv"><span id="clearData">[Clear]</span></div>
+    </div>
+    <div id="myModal" class="modal">
+        <div id="editSeriesBar" class="formBar">
+            <fieldset>
+                <div>
+                    <section>
+                        <label for="seriesNumEdit">N°</label><input type="number" id="seriesNumEdit"/>
+                        <label for="seriesNameEdit">Name :</label><input type="text" id="seriesNameEdit">
+                        <label for="seriesWikiFREdit">Wiki FR :</label><input type="text" id="seriesWikiFREdit">
+                        <label for="seriesWikiENEdit">Wiki EN :</label><input type="text" id="seriesWikiENEdit">
+                        <label for="seriesNoteEdit">Note :</label><textarea id="seriesNoteEdit"></textarea>
+                    </section>
+                    <section>
+                        <span><u><b>Seasons</b></u> :</span>
+                        <label for="seriesSOutEdit">Out :</label><input type="text" id="seriesSOutEdit">
+                        <label for="seriesSSeenEdit">Seen :</label><input type="text" id="seriesSSeenEdit">
+                        <label for="seriesSInProgressEdit">In Progress :</label><input type="text" id="seriesSInProgressEdit">
+                        <label for="seriesSNotSeenEdit">Not Seen :</label><input type="text" id="seriesSNotSeenEdit">
+                        <label for="seriesSComingEdit">Coming :</label><input type="text" id="seriesSComingEdit">
+                        <label for="seriesFinishedEdit">Finished?</label><div><input type="checkbox" id="seriesFinishedEdit"></div>
+                    </section>
+                </div>
+                <section class="toTheLeft">
+                    <button id="editCancel" class="saveButton"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cancel_icon.svg/1200px-Cancel_icon.svg.png" alt="cancel.png" width="12px"/>Cancel</button>
+                    <button id="editSeries" class="saveButton"><img src="https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/save-512.png" alt="save.png"/>Save</button>
+                </section>
+            </fieldset>
+        </div>
+    </div>
+    <a id="downloadAnchorElem" class="display:none"></a>
+    <script>
+
+        class Series {
+
+            constructor({num, name, seasons_out, seasons_seen, seasons_in_progress, seasons_not_seen, seasons_coming, isFinished, note, wikiFR, wikiEN}) {
+                this.num = num;
+                this.name = name;
+                this.seasons_out = seasons_out;
+                this.seasons_seen = seasons_seen;
+                this.seasons_in_progress = seasons_in_progress;
+                this.seasons_not_seen = seasons_not_seen;
+                this.seasons_coming = seasons_coming;
+                this.isFinished = isFinished;
+                this.note = note;
+                this.wikiFR = wikiFR;
+                this.wikiEN = wikiEN;
+            }
+
+        }
+
+        class SeriesManager {
+
+            constructor(categories= {}) {
+                this.categories = categories;
+            }
+
+            add(name, series = []) {
+                this.categories[name] = series;
+            }
+
+            remove(name) {
+                delete this.categories[name];
+            }
+
+        }
+
+        let JSON_DATA = new SeriesManager();
+        let tempSeries;
+        //displaySeries(JSON_DATA);
+
+        let hideFS = toggleSwitch("hideFinishedSeries","hide", "false", "true");
+        let darkMode = toggleSwitch("body", "class", "", "darkMode");
+        window.onload = () => document.getElementById("darkMode").click(); //Dark Mode by default
+
+        document.getElementById("downloadJSON").addEventListener("click", event => downloadJSON());
+        document.getElementById("loadData").addEventListener("click", event => loadData());
+        document.getElementById("addCategoryLink").addEventListener("click", event => hide("addCategoryBar","formBar"));
+        document.getElementById("addCategory").addEventListener("click", event => addCategory());
+        document.getElementById("addSeries").addEventListener("click", event => addSeries());
+        document.getElementById("editSeries").addEventListener("click", event => editSeries());
+        document.getElementById("hideFinishedSeries").addEventListener("click",event => {hideFS.next(); displaySeries(JSON_DATA);});
+        document.getElementById("editCancel").onclick = () => document.getElementById("myModal").style.display = "none";
+        document.getElementById("clearData").addEventListener("click",event => {
+            JSON_DATA = new SeriesManager();
+            displaySeries(JSON_DATA);
+            document.getElementById("dataStatus").innerText = "";
+        });
+        document.getElementById("darkMode").addEventListener("click",event => darkMode.next());
+        document.getElementById("searchBar").addEventListener("input", event => search());
+
+        // priority color : hover > series finished > color seasons
+
+        function search() {
+            let search = document.getElementById("searchBar").value;
+            if(search === "") {
+                displaySeries(JSON_DATA);
+            } else {
+                let copyData = Object.assign(new SeriesManager(), JSON.parse(JSON.stringify(JSON_DATA)));
+                Object.keys(copyData.categories).forEach((name) =>
+                    copyData.categories[name] = copyData.categories[name].filter(v => v.name.toLowerCase().includes(search.toLowerCase())));
+                displaySeries(copyData);
+            }
+        }
+
+        function addCategory() {
+            let name = document.getElementById("categoryName").value;
+            JSON_DATA.add(name);
+            document.getElementById("categoryName").value = "";
+            document.getElementById("addCategoryBar").setAttribute("class","formBar hide");
+            displaySeries(JSON_DATA);
+        }
+
+        function addSeries() {
+            JSON_DATA.categories[document.getElementById("addSeriesBar").getAttribute("category")].push({
+                "num":parseInt(document.getElementById("seriesNum").value),
+                "name":document.getElementById("seriesName").value,
+                "seasons_out":document.getElementById("seriesSOut").value,
+                "seasons_seen":document.getElementById("seriesSSeen").value,
+                "seasons_in_progress":document.getElementById("seriesSInProgress").value,
+                "seasons_not_seen":document.getElementById("seriesSNotSeen").value,
+                "seasons_coming":document.getElementById("seriesSComing").value,
+                "isFinished":document.getElementById("seriesFinished").checked,
+                "note":document.getElementById("seriesNote").value,
+                "wikiFR":document.getElementById("seriesWikiFR").value,
+                "wikiEN":document.getElementById("seriesWikiEN").value
+            });
+            document.getElementById("seriesNum").value = 0;
+            document.getElementById("seriesName").value = "";
+            document.getElementById("seriesSOut").value = "";
+            document.getElementById("seriesSSeen").value = "";
+            document.getElementById("seriesSInProgress").value = "";
+            document.getElementById("seriesSNotSeen").value = "";
+            document.getElementById("seriesSComing").value = "";
+            document.getElementById("seriesFinished").checked = false;
+            document.getElementById("seriesNote").value = "";
+            document.getElementById("seriesWikiFR").value = "";
+            document.getElementById("seriesWikiEN").value = "";
+            hide("addSeriesBar", "formBar");
+            displaySeries(JSON_DATA);
+        }
+
+        function displaySeries(data) {
+            let table = document.getElementById("table");
+            Array.from(table.getElementsByTagName("tbody")).forEach(tbody => tbody.remove());
+            Object.keys(data.categories).forEach((name) => {
+                table.insertAdjacentHTML("beforeend", `\n` +
+                    `                <tbody>\n` +
+                    `                    <tr>\n` +
+                    `                        <th colspan='10'>\n` +
+                    `                            <div class="tCategoryBar">\n` +
+                    `                                <div></div>\n` +
+                    `                                <div>${name}</div>\n` +
+                    `                                <div class="tCategoryFunctionBar">\n` +
+                    `                                    <a id="addSeries${name}">[+Series]</a>\n` +
+                    `                                    <a id="hide${name}">[Hide]</a>\n` +
+                    `                                </div>` +
+                    `                            </div>\n` +
+                    `                        </th>\n` +
+                    `                    </tr>\n` +
+                    `                </tbody>`);
+                document.getElementById("addSeries"+name).addEventListener("click", event => {
+                    let a = document.getElementById("addSeriesBar");
+                    if(!(a.getAttribute("category") !== name && a.getAttribute("class") === "formBar")) hide("addSeriesBar", "formBar");
+                    a.setAttribute("category",name);
+                    a.getElementsByTagName("legend")[0].innerText = name;
+                });
+                document.getElementById("hide"+name).addEventListener("click", event => hide(name));
+                let tbody = document.createElement("tbody");
+                tbody.setAttribute("id",name);
+                let sortedSeries = sortSeriesTable(data.categories[name]);
+                sortedSeries.forEach(series => {
+                    if(!(document.getElementById("hideFinishedSeries").getAttribute("hide") === "true" && series.isFinished)) {
+                        tbody.insertAdjacentHTML("beforeend", `\n` +
+                            `                        <tr ${(series.isFinished) ? "class='sat'" : ""}>\n` +
+                            `                            <td>${series.name}</td>\n` +
+                            `                            <td>${series.seasons_out}</td>\n` +
+                            getSeasonsSeen(series) +
+                            `                            <td>${series.seasons_coming}</td>\n` +
+                            `                            <td>${series.note}</td>\n` +
+                            getLink(series.wikiFR) +
+                            getLink(series.wikiEN) +
+                            `                            <td class="edit wikiLink"><div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/1024px-OOjs_UI_icon_edit-ltr.svg.png" alt="edit.png"/></div></td>\n` +
+                            `                        </tr>`);
+                        let edit = tbody.getElementsByClassName("edit");
+                        edit[edit.length-1].getElementsByTagName("img")[0].addEventListener("click",event => displayEdit(event))
+                    }
+                });
+                document.getElementById("table").insertAdjacentElement('beforeend',tbody);
+            });
+        }
+
+        function displayEdit(event) {
+            let tr = event.target.parentNode.parentNode.parentNode;
+            let name = tr.getElementsByTagName("td")[0].innerText;
+            let category = tr.parentNode.id;
+            document.getElementById("editSeriesBar").setAttribute("category", category);
+            document.getElementById("myModal").style.display = "flex";
+            tempSeries = JSON_DATA.categories[category].find(e => e.name === name);
+            document.getElementById("seriesNumEdit").value = tempSeries.num;
+            document.getElementById("seriesNameEdit").value = tempSeries.name;
+            document.getElementById("seriesSOutEdit").value = tempSeries.seasons_out;
+            document.getElementById("seriesSSeenEdit").value = tempSeries.seasons_seen;
+            document.getElementById("seriesSInProgressEdit").value = tempSeries.seasons_in_progress;
+            document.getElementById("seriesSNotSeenEdit").value = tempSeries.seasons_not_seen;
+            document.getElementById("seriesSComingEdit").value = tempSeries.seasons_coming;
+            document.getElementById("seriesFinishedEdit").checked = tempSeries.isFinished;
+            document.getElementById("seriesNoteEdit").value = tempSeries.note;
+            document.getElementById("seriesWikiFREdit").value = tempSeries.wikiFR;
+            document.getElementById("seriesWikiENEdit").value = tempSeries.wikiEN;
+        }
+
+        function editSeries() {
+            let category = document.getElementById("editSeriesBar").getAttribute("category");
+            JSON_DATA.categories[category].forEach((v, i, t) => {
+                if(v.name === tempSeries.name) {
+                    t[i].num = parseInt(document.getElementById("seriesNumEdit").value);
+                    t[i].name = document.getElementById("seriesNameEdit").value;
+                    t[i].seasons_out = document.getElementById("seriesSOutEdit").value;
+                    t[i].seasons_seen = document.getElementById("seriesSSeenEdit").value;
+                    t[i].seasons_in_progress = document.getElementById("seriesSInProgressEdit").value;
+                    t[i].seasons_not_seen = document.getElementById("seriesSNotSeenEdit").value;
+                    t[i].seasons_coming = document.getElementById("seriesSComingEdit").value;
+                    t[i].isFinished = document.getElementById("seriesFinishedEdit").checked;
+                    t[i].note = document.getElementById("seriesNoteEdit").value;
+                    t[i].wikiFR = document.getElementById("seriesWikiFREdit").value;
+                    t[i].wikiEN = document.getElementById("seriesWikiENEdit").value;
+                }
+            });
+            document.getElementById("myModal").style.display = "none";
+            tempSeries = null;
+            displaySeries(JSON_DATA);
+        }
+
+        function loadData() {
+            let fileList = document.getElementById("selectDataFile").files;
+            if(fileList.length > 0) {
+                let file = fileList[0];
+                let reader = new FileReader();
+                reader.onloadend = data => {
+                    JSON_DATA = Object.assign(new SeriesManager(), JSON.parse(data.target.result));
+                    let status = document.getElementById("dataStatus");
+                    status.innerText = "Data Loaded !";
+                    status.setAttribute("class","green");
+                    displaySeries(JSON_DATA);
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function downloadJSON() {
+            let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(JSON_DATA));
+            let dlAnchorElem = document.getElementById('downloadAnchorElem');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "data.json");
+            dlAnchorElem.click();
+        }
+
+        function getSeasonsSeen(series) {
+            let seasonsSeen = ``;
+            if(series.seasons_seen === "" && series.seasons_in_progress === "" && series.seasons_not_seen === "") {
+                seasonsSeen += '                            <td colspan="3" class="empty"></td>\n';
+            } else {
+                if(series.seasons_seen !== "") {
+                    if(series.seasons_in_progress === "" && series.seasons_not_seen === "") {
+                        seasonsSeen += `                            <td colspan="3" class="vu">${series.seasons_seen}</td>\n`;
+                    } else {
+                        seasonsSeen += `                            <td colspan="1" class="vu">${series.seasons_seen}</td>\n`;
+                    }
+                }
+                if(series.seasons_in_progress !== "") {
+                    if(series.seasons_seen === "" && series.seasons_not_seen === "") {
+                        seasonsSeen += `                            <td colspan="3" class="encour">${series.seasons_in_progress}</td>\n`;
+                    } else if(series.seasons_seen !== "" && series.seasons_not_seen === "") {
+                        seasonsSeen += `                            <td colspan="2" class="encour">${series.seasons_in_progress}</td>\n`;
+                    } else {
+                        seasonsSeen += `                            <td colspan="1" class="encour">${series.seasons_in_progress}</td>\n`;
+                    }
+                }
+                if(series.seasons_not_seen !== "") {
+                    if(series.seasons_seen === "" && series.seasons_in_progress === "") {
+                        seasonsSeen += `                            <td colspan="3" class="pasvu">${series.seasons_not_seen}</td>\n`;
+                    } else if(series.seasons_seen === "" || series.seasons_in_progress === "") {
+                        seasonsSeen += `                            <td colspan="2" class="pasvu">${series.seasons_not_seen}</td>\n`;
+                    } else {
+                        seasonsSeen += `                            <td colspan="1" class="pasvu">${series.seasons_not_seen}</td>\n`;
+                    }
+                }
+            }
+            return seasonsSeen;
+        }
+
+        function hide(id, dClass = "") {
+            let toHide = document.getElementById(id);
+            if(toHide.getAttribute("class") === null || !toHide.getAttribute("class").includes("hide")) {
+                toHide.setAttribute("class", dClass+" hide");
+            } else {
+                toHide.setAttribute("class", dClass);
+            }
+        }
+
+        function * toggleSwitch(id, attribute, initialValue, value) {
+            while (true) {
+                yield ;
+                let toggleSwitch = document.getElementById(id);
+                if(toggleSwitch.getAttribute(attribute) === value) {
+                    toggleSwitch.setAttribute(attribute, initialValue);
+                } else {
+                    toggleSwitch.setAttribute(attribute, value);
+                }
+                yield ;
+            }
+        }
+
+        function sortSeriesTable(table) {
+            return table.sort((a, b) => {
+                if((a.num !== null && a.num > 0 && a.num !== "") && (b.num !== null && b.num > 0 && b.num !== "")) {
+                    if(a.num < b.num) return -1;
+                    else if (a.num > b.num) return 1;
+                    else return 0;
+                } else if((a.num !== null && a.num > 0 && a.num !== "") || (b.num !== null && b.num > 0 && b.num !== "")) {
+                    if(b.num !== null && b.num > 0 && b.num !== "") return 1;
+                    else return -1;
+                } else if((a.num === null || a.num === undefined || a.num <= 0 || a.num === "") && (b.num === null || b.num === undefined || b.num <= 0 || b.num === "")) {
+                    if(a.name < b.name) return -1;
+                    else if (a.name > b.name) return 1;
+                    else return 0;
+                } else {
+                    return 0;
+                }
+            });
+        }
+
+        function getLink(link) {
+            if(link === "") {
+                return `                            <td class="wikiLink"></td>\n`;
+            } else {
+                return `                            <td class="wikiLink"><div><button onclick="window.open('${link}')">+</button></div></td>\n`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Series Manager</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js"></script>
+</head>
+<body id="body">
+    <div>
+        <div class="toTheLeft functionBar">
+            <span>Dark Mode</span>
+            <label id="darkMode" class="switch" hide="false">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="functionBar">
+            <input type="search" id="searchBar" placeholder="Search...">
+            <div>
+                <input type="file" id="selectDataFile">
+                <button id="loadData">Load Data</button>
+                <span id="dataStatus"></span>
+                <button id="downloadJSON">Download JSON Data</button>
+            </div>
+        </div>
+        <div class="functionBar">
+            <div></div>
+            <div>
+                <span>Hide finished series ?</span>
+                <label id="hideFinishedSeries" class="switch" hide="false">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <a id="addCategoryLink">[+Category]</a>
+            </div>
+        </div>
+        <div id="addCategoryBar" class="formBar hide">
+            <label>Name : <input type="text" id="categoryName"></label>
+            <button id="addCategory" class="saveButton"><img src="img/save.png"/>Save</button>
+        </div>
+        <div id="addSeriesBar" class="formBar hide">
+            <fieldset>
+                <legend></legend>
+                <div>
+                    <section>
+                        <label for="seriesNum">N°</label><input type="number" id="seriesNum"/>
+                        <label for="seriesName">Name :</label><input type="text" id="seriesName">
+                        <label for="seriesWikiFR">Wiki FR :</label><input type="text" id="seriesWikiFR">
+                        <label for="seriesWikiEN">Wiki EN :</label><input type="text" id="seriesWikiEN">
+                        <label for="seriesNote">Note :</label><textarea id="seriesNote"></textarea>
+                    </section>
+                    <section>
+                        <span><u><b>Seasons</b></u> :</span>
+                        <label for="seriesSOut">Out :</label><input type="text" id="seriesSOut">
+                        <label for="seriesSSeen">Seen :</label><input type="text" id="seriesSSeen">
+                        <label for="seriesSInProgress">In Progress :</label><input type="text" id="seriesSInProgress">
+                        <label for="seriesSNotSeen">Not Seen :</label><input type="text" id="seriesSNotSeen">
+                        <label for="seriesSComing">Coming :</label><input type="text" id="seriesSComing">
+                        <label for="seriesFinished">Finished?</label><div><input type="checkbox" id="seriesFinished"></div>
+                    </section>
+                </div>
+                <section class="toTheLeft">
+                    <button id="addSeries" class="saveButton"><img src="img/save.png"/>Save</button>
+                </section>
+            </fieldset>
+        </div>
+        <div class="middleTable">
+            <table cellspacing="3px" id="table">
+                <thead>
+                    <tr>
+                        <th rowspan="2" width="250px" id="topLeftCorner">Nom</th>
+                        <th rowspan="2" width="100px">Saisons sortie</th>
+                        <th rowspan="2" width="100px" colspan="3">Saisons Vue</th>
+                        <th rowspan="2" width="100px">Saison à venir</th>
+                        <th rowspan="2" width="500px">Note</th>
+                        <th colspan="2" width="100px">Wiki</th>
+                        <th rowspan="2" id="topRightCorner"></th>
+                    </tr>
+                    <tr>
+                        <th>FR</th>
+                        <th>VO</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th colspan="10"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="clearDiv"><span id="clearData">[Clear]</span></div>
+    </div>
+    <div id="myModal" class="modal">
+        <div id="editSeriesBar" class="formBar">
+            <fieldset>
+                <div>
+                    <section>
+                        <label for="seriesNumEdit">N°</label><input type="number" id="seriesNumEdit"/>
+                        <label for="seriesNameEdit">Name :</label><input type="text" id="seriesNameEdit">
+                        <label for="seriesWikiFREdit">Wiki FR :</label><input type="text" id="seriesWikiFREdit">
+                        <label for="seriesWikiENEdit">Wiki EN :</label><input type="text" id="seriesWikiENEdit">
+                        <label for="seriesNoteEdit">Note :</label><textarea id="seriesNoteEdit"></textarea>
+                    </section>
+                    <section>
+                        <span><u><b>Seasons</b></u> :</span>
+                        <label for="seriesSOutEdit">Out :</label><input type="text" id="seriesSOutEdit">
+                        <label for="seriesSSeenEdit">Seen :</label><input type="text" id="seriesSSeenEdit">
+                        <label for="seriesSInProgressEdit">In Progress :</label><input type="text" id="seriesSInProgressEdit">
+                        <label for="seriesSNotSeenEdit">Not Seen :</label><input type="text" id="seriesSNotSeenEdit">
+                        <label for="seriesSComingEdit">Coming :</label><input type="text" id="seriesSComingEdit">
+                        <label for="seriesFinishedEdit">Finished?</label><div><input type="checkbox" id="seriesFinishedEdit"></div>
+                    </section>
+                </div>
+                <section class="toTheLeft">
+                    <button id="editCancel" class="saveButton"><img src="img/cancel.png" width="12px"/>Cancel</button>
+                    <button id="editSeries" class="saveButton"><img src="img/save.png"/>Save</button>
+                </section>
+            </fieldset>
+        </div>
+    </div>
+    <a id="downloadAnchorElem" class="display:none"></a>
+</body>
+</html>
