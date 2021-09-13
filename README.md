@@ -22,5 +22,5 @@ The one page is the file named "SeriesManager (One Page).html"
 
 ### Note
 
-I know it's not perfect but it do the job and I don't need a better.
+I know it's not perfect but it do the job and I don't need better.
 I just needed a way to save locally all the series that I watch so I did that.
