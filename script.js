@@ -115,10 +115,11 @@ function displaySeries(data) {
                     `                            <td>${series.note}</td>\n` +
                                                     getLink(series.wikiFR) +
                                                     getLink(series.wikiEN) +
-                    `                            <td class="edit wikiLink"><div><img src="img/edit.png"/></div></td>\n` +
+                    `                            <td class="edit wikiLink"><div><img src="img/edit.png" alt="edit.png"/><img src="img/delete.jpg" alt="delete.jpg" style="width:20px"/></div></td>\n` +
                     `                        </tr>`);
                 let edit = tbody.getElementsByClassName("edit");
-                edit[edit.length-1].getElementsByTagName("img")[0].addEventListener("click",event => displayEdit(event))
+                edit[edit.length-1].getElementsByTagName("img")[0].addEventListener("click",event => displayEdit(event));
+                edit[edit.length-1].getElementsByTagName("img")[1].addEventListener("click",event => displayDelete(series.name, name));
             }
         });
         document.getElementById("table").insertAdjacentElement('beforeend',tbody);
@@ -165,6 +166,13 @@ function editSeries() {
     document.getElementById("myModal").style.display = "none";
     tempSeries = null;
     displaySeries(JSON_DATA);
+}
+
+function displayDelete(name, category) {
+    if(confirm("Are you sure want to delete it ?\n"+name+" ("+category+")")) {
+        JSON_DATA.categories[category] = JSON_DATA.categories[category].filter(v => v.name !== name);
+        displaySeries(JSON_DATA);
+    }
 }
 
 function loadData() {
